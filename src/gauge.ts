@@ -55,8 +55,9 @@ const getChartConfigEditorDefinition = (): ChartConfigEditorDefinition[] => {
 const getVisualPropEditorDefinition = (): VisualPropEditorDefinition => {
   logMessage("get visual prop editor definition");
 
-  const visualPropEditorDefinition: VisualPropEditorDefinition =
-    getVisualPropEditorDefinition();
+  const visualPropEditorDefinition: VisualPropEditorDefinition = {
+    elements: [],
+  };
   return visualPropEditorDefinition;
 };
 
