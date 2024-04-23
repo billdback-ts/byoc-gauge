@@ -9,6 +9,7 @@ import {
   ChartConfigEditorDefinition,
   ChartModel,
   ChartToTSEvent,
+  ColumnType,
   CustomChartContext,
   getChartContext,
   Query,
@@ -34,9 +35,33 @@ const logMessage = (msg: string, data: any = "") => {
 const getDefaultChartConfig = (chartModel: ChartModel): ChartConfig[] => {
   logMessage("getting default chart config", chartModel);
 
+  // Get the columns for reference.
+  const cols = chartModel.columns;
+
+  // Find the measures.
+  const measureColumns = _.filter(
+    cols,
+    (col) => col.type === ColumnType.MEASURE
+  );
+
+  // Find the columns.  When we render we'll only use the aggregate value of the first measure.
+  const attributeColumns = _.filter(
+    cols,
+    (col) => col.type === ColumnType.ATTRIBUTE
+  );
+
   const defaultChartConfig: ChartConfig = {
     key: "default",
-    dimensions: [],
+    dimensions: [
+      {
+        key: "segments",
+        columns: [...attributeColumns],
+      },
+      {
+        key: "values",
+        columns: measureColumns.slice(0, 1),
+      },
+    ],
   };
 
   return [defaultChartConfig];
