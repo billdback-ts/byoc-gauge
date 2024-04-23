@@ -2,6 +2,7 @@
  * Renders a guage chart for ThoughtSpot BYOC.
  * This chart conforms to the ThoughtSpot SDK for BYOC (https://github.com/thoughtspot/ts-chart-sdk).
  */
+import _ from "lodash";
 
 import {
   ChartConfig,
@@ -33,8 +34,12 @@ const logMessage = (msg: string, data: any = "") => {
 const getDefaultChartConfig = (chartModel: ChartModel): ChartConfig[] => {
   logMessage("getting default chart config", chartModel);
 
-  const defaultChartConfig: ChartConfig[] = [];
-  return defaultChartConfig;
+  const defaultChartConfig: ChartConfig = {
+    key: "default",
+    dimensions: [],
+  };
+
+  return [defaultChartConfig];
 };
 
 /**
@@ -71,7 +76,9 @@ const getQueriesFromChartConfig = (
 ): Array<Query> => {
   logMessage("get queries from chart config: ", chartConfig);
 
-  const queries: Array<Query> = [];
+  let queries: Array<Query> = [];
+
+  logMessage("queries: ", queries);
   return queries;
 };
 
