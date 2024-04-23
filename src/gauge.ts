@@ -76,7 +76,21 @@ const getQueriesFromChartConfig = (
 ): Array<Query> => {
   logMessage("get queries from chart config: ", chartConfig);
 
-  let queries: Array<Query> = [];
+  let queries: Query[] = [];
+
+  // map all the columns in the config to the query array
+  queries = chartConfig.map(
+    (config: ChartConfig): Query =>
+      _.reduce(
+        config.dimensions,
+        (acc: Query, dimension) => ({
+          queryColumns: [...acc.queryColumns, ...dimension.columns],
+        }),
+        {
+          queryColumns: [],
+        } as Query
+      )
+  );
 
   logMessage("queries: ", queries);
   return queries;
