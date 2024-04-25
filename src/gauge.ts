@@ -33,8 +33,10 @@ const logMessage = (msg: string, data: any = "") => {
  * @return An array of chart configs (https://ts-chart-sdk-docs.vercel.app/interfaces/ChartConfig.html)
  */
 const getDefaultChartConfig = (chartModel: ChartModel): ChartConfig[] => {
-  logMessage("getting default chart config", chartModel);
-  console.log(chartModel);
+  logMessage(
+    "getting default chart config",
+    JSON.stringify(chartModel, null, 2)
+  );
 
   // Get the columns for reference.
   const cols = chartModel.columns;
