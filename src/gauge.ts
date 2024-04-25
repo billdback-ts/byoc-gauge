@@ -34,6 +34,7 @@ const logMessage = (msg: string, data: any = "") => {
  */
 const getDefaultChartConfig = (chartModel: ChartModel): ChartConfig[] => {
   logMessage("getting default chart config", chartModel);
+  console.log(chartModel);
 
   // Get the columns for reference.
   const cols = chartModel.columns;
